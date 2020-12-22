@@ -1,3 +1,6 @@
+# Sodoku_Solve
+### Current State
+
 Originally started with 16X16 solver from a university project. Written in very C style Cpp.
 
 Have changed back to a 9X9 solver and tried use more Cpp style code.
@@ -15,3 +18,8 @@ XXXXXXX57
 3XXXXX8XX
 XXX327XXX
 ```
+
+### Future Improvements
+
+* Add compatabiliaty for 16X16 'hexadoku'
+* Potentially allow user to enter sodoku at run time (gui?)
