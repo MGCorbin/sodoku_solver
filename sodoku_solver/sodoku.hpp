@@ -10,14 +10,15 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class Sodoku
 {
 public:
     explicit Sodoku(const int gridSize = 9, const int miniGridSize = 3);
     bool load(const char *inFile);
-    void print();
     bool solve();
+    friend std::ostream& operator << (std::ostream& os, const Sodoku &s);
     
 private:
     bool noConflict(int row, int col, char val);
@@ -30,8 +31,6 @@ private:
     const int m_MiniGridSize;
     const int m_GridSize;
     std::vector<std::vector<char>> m_Grid;
-
-    
 };
 
 #endif /* sodoku_hpp */

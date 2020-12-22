@@ -42,29 +42,6 @@ bool Sodoku::load(const char* inFile)
     return false;
 }
 
-void Sodoku::print()
-{
-    std::string divider = " ------ ------ ------ ";
-    
-    for(int row=0; row<m_Grid.size(); row++)
-    {
-        if(!(row % m_MiniGridSize))
-        {
-            std::cout << divider << std::endl;
-        }
-        
-        for(int col=0; col<m_Grid[0].size(); col++)
-        {
-            if(!(col % m_MiniGridSize))
-            {
-                std::cout << "|";
-            }
-            std::cout << m_Grid.at(row).at(col) << " ";
-        }
-        std::cout << "|" << std::endl;
-    }
-    std::cout << divider << std::endl << std::endl;
-}
 
 bool Sodoku::solve()
 {
@@ -89,6 +66,34 @@ bool Sodoku::solve()
     }
     return false;
 }
+
+std::ostream& operator << (std::ostream& os, const Sodoku &s)
+{
+    std::string divider = " ------ ------ ------ ";
+    
+    
+    for(int row=0; row<s.m_GridSize; row++)
+    {
+        if(!(row % s.m_MiniGridSize))
+        {
+            os << divider << std::endl;
+        }
+        
+        for(int col=0; col<s.m_GridSize; col++)
+        {
+            if(!(col % s.m_MiniGridSize))
+            {
+                os << "|";
+            }
+            os << s.m_Grid[row][col] << " ";
+        }
+        os << "|" << std::endl;
+    }
+    os << divider << std::endl << std::endl;
+    
+    return os;
+}
+
 
 bool Sodoku::noConflict(int row, int col, char val)
 {

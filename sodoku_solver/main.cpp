@@ -14,9 +14,9 @@ int main(void)
     Sodoku mySodoku;
     if(mySodoku.load("input.txt"))
     {
-        mySodoku.print();
+        std::cout << mySodoku;
         mySodoku.solve();
-        mySodoku.print();
+        std::cout << mySodoku;
     }
     else
     {
