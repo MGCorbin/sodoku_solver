@@ -14,8 +14,8 @@
             filePath = "sodoku_solver/sodoku.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "Sodoku::load(inFile)"
             landmarkType = "7">
          </BreakpointContent>

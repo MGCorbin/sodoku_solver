@@ -9,15 +9,8 @@
 #include <fstream>
 
 #include "sodoku.hpp"
+#include "conversion.hpp"
 
-char hex_to_ascii(uint8_t d)
-{
-    if(d < 10)
-        d += '0';
-    else
-        d += ('A' - 10);
-    return d;
-}
 
 Sodoku::Sodoku(const int gridSize, const int miniGridSize)
     : m_GridSize(gridSize), m_MiniGridSize(miniGridSize)
@@ -39,7 +32,7 @@ bool Sodoku::load(const char* inFile)
             {
                 char val;
                 inStream >> val;
-                m_Grid[row][col] = val;
+                m_Grid[row][col] = val;             // add the value at the row and column to the grid
             }
         }
         
@@ -77,17 +70,17 @@ bool Sodoku::solve()
 {
     int row, col;
     
-    if(!findEmptyCell(row, col))        // if we cant find an empty cell, we must have completed the sodoku
+    if(!isEmptyCell(row, col))                          // if we cant find an empty cell, we must have completed the sodoku
     {
         return true;
     }
     
-    for(int i=1; i<=m_GridSize; i++)
+    for(int i=1; i<=m_GridSize; i++)                    // start from 1 as these are the numbers we try in each space with an X
     {
-        if(noConflict(row, col, hex_to_ascii(i)))
+        if(noConflict(row, col, hex_to_ascii(i)))       // if we can add that number without breaking the rules of sodoku, try it
         {
             m_Grid[row][col] = hex_to_ascii(i);
-            if(solve())
+            if(solve())                                 // recursively solve the sodoku
             {
                 return true;
             }
@@ -145,7 +138,7 @@ bool Sodoku::checkCol(int col, char val)
     return false;
 }
 
-bool Sodoku::findEmptyCell(int &row, int &col)
+bool Sodoku::isEmptyCell(int &row, int &col)
 {
     for(row=0; row<m_GridSize; row++)
     {

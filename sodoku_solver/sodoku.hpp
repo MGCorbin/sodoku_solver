@@ -24,7 +24,7 @@ private:
     bool checkMiniGrid(int startRow, int startCol, char val);
     bool checkRow(int row, char val);
     bool checkCol(int col, char val);
-    bool findEmptyCell(int &row, int &col);
+    bool isEmptyCell(int &row, int &col);
     
 private:
     const int m_MiniGridSize;
