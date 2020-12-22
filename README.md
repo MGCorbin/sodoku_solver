@@ -19,6 +19,10 @@ XXXXXXX57
 XXX327XXX
 ```
 
+When run, the progam first prints the unsolved puzzle, then the solved version:
+
+![Program Output](docs/solver_out.png)
+
 ### Future Improvements
 
 * Add compatabiliaty for 16X16 'hexadoku'
