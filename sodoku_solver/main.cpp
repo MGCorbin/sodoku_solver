@@ -11,9 +11,11 @@
 
 int main(void)
 {
-    Sodoku mySodoku(9, 3);
+    Sodoku mySodoku;
     if(mySodoku.load("input.txt"))
     {
+        mySodoku.print();
+        mySodoku.solve();
         mySodoku.print();
     }
     else

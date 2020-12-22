@@ -10,6 +10,15 @@
 
 #include "sodoku.hpp"
 
+char hex_to_ascii(uint8_t d)
+{
+    if(d < 10)
+        d += '0';
+    else
+        d += ('A' - 10);
+    return d;
+}
+
 Sodoku::Sodoku(const int gridSize, const int miniGridSize)
     : m_GridSize(gridSize), m_MiniGridSize(miniGridSize)
 {
@@ -66,30 +75,89 @@ void Sodoku::print()
 
 bool Sodoku::solve()
 {
+    int row, col;
+    
+    if(!findEmptyCell(row, col))        // if we cant find an empty cell, we must have completed the sodoku
+    {
+        return true;
+    }
+    
+    for(int i=1; i<=m_GridSize; i++)
+    {
+        if(noConflict(row, col, hex_to_ascii(i)))
+        {
+            m_Grid[row][col] = hex_to_ascii(i);
+            if(solve())
+            {
+                return true;
+            }
+            m_Grid[row][col] = 'X';
+        }
+    }
     return false;
 }
 
-bool Sodoku::noConflict(int row, int col, int val)
+bool Sodoku::noConflict(int row, int col, char val)
 {
+    return  !checkMiniGrid(row - (row % m_MiniGridSize), col - (col % m_MiniGridSize), val) &&
+            !checkRow(row, val) &&
+            !checkCol(col, val) &&
+            m_Grid[row][col] == 'X';
+}
+
+bool Sodoku::checkMiniGrid(int startRow, int startCol, char val)
+{
+    for(int row=0; row<m_MiniGridSize; row++)
+    {
+        for(int col=0; col<m_MiniGridSize; col++)
+        {
+            if(m_Grid[row + startRow][col + startCol] == val)       // offset depending on which mini grid we are working in
+            {
+                return true;
+            }
+        }
+    }
+    
     return false;
 }
 
-bool Sodoku::checkMiniGrid(int startRow, int startCol, int val)
+bool Sodoku::checkRow(int row, char val)
 {
+    for(int col=0; col<m_GridSize; col++)
+    {
+        if(m_Grid[row][col] == val)
+        {
+            return true;
+        }
+    }
     return false;
 }
 
-bool Sodoku::checkRow(int row, int col, int val)
+bool Sodoku::checkCol(int col, char val)
 {
-    return false;
-}
-
-bool Sodoku::checkCol(int row, int col, int val)
-{
+    for(int row=0; row<m_GridSize; row++)
+    {
+        if(m_Grid[row][col] == val)
+        {
+            return true;
+        }
+    }
     return false;
 }
 
 bool Sodoku::findEmptyCell(int &row, int &col)
 {
+    for(row=0; row<m_GridSize; row++)
+    {
+        for(col=0; col<m_GridSize; col++)
+        {
+            if(m_Grid[row][col] == 'X')
+            {
+                return true;
+            }
+        }
+    }
     return false;
 }
+    
+

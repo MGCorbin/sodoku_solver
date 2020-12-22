@@ -20,10 +20,10 @@ public:
     bool solve();
     
 private:
-    bool noConflict(int row, int col, int val);
-    bool checkMiniGrid(int startRow, int startCol, int val);
-    bool checkRow(int row, int col, int val);
-    bool checkCol(int row, int col, int val);
+    bool noConflict(int row, int col, char val);
+    bool checkMiniGrid(int startRow, int startCol, char val);
+    bool checkRow(int row, char val);
+    bool checkCol(int col, char val);
     bool findEmptyCell(int &row, int &col);
     
 private:
