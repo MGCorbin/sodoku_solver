@@ -1,4 +1,4 @@
-# Sodoku_Solve
+# Sodoku_Solver
 ### Current State
 
 Originally started with 16X16 solver from a university project. Written in very C style Cpp.
